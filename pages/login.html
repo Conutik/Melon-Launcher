@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<style>
+
+    #info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #emailDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #passwordDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #submitDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #errorDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #email {
+    border-radius: 18px;
+    background: #29B76D;
+    padding: 20px; 
+    width: 125px;
+    height: 5px;
+    outline-width: 0px;
+    border: transparent;
+}
+
+#password {
+    border-radius: 18px;
+    background: #29B76D;
+    padding: 20px; 
+    width: 125px;
+    height: 5px;
+    outline-width: 0px;
+    border: transparent;
+}
+
+#submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 18px;
+        background: #29B76D;
+        padding: 0 20px;
+        width: 165px;
+        height: 40px;
+        outline-width: 0px;
+        border: transparent;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+    }
+
+    .btn {
+        background-color: transparent;
+        /* Blue background */
+        background-image: 100vw 100vh;
+        border: none;
+        /* Remove borders */
+        color: white;
+        /* White text */
+        padding: 12px 16px;
+        /* Some padding */
+        font-size: 16px;
+        /* Set a font size */
+        cursor: pointer;
+        /* Mouse pointer on hover */
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+        outline: 1px transparent white;
+        border: none;
+    }
+
+    .btn:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    #closeDiv {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+</style>
+
+
+<body style="background-image: url(../pictures/Merged\ BackGround.png);">
+
+    <div id="closeDiv">
+
+        <button class="btn" id="minimizeButton" style="padding: 12px 1px; padding-right: 15px; padding-left: 15px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrows-angle-contract" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z" />
+            </svg>
+        </button>
+        <button class="btn" id="closeButton" style="padding: 12px 1px; padding-right: 15px; padding-left: 15px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                viewBox="0 0 16 16">
+                <path
+                    d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
+            </svg>
+        </button>
+    
+    
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <form id="form">
+        <div id="emailDiv">
+            <input type="email" name="email" id="email" placeholder="Email" required>
+        </div>
+        <br>
+        <div id="passwordDiv">
+            <input type="password" name="password" id="password" placeholder="Password" required>
+        </div>
+
+        <br>
+
+        <div id="submitDiv">
+            <input type="submit" id="submit" value="Submit">
+        </div>
+
+        <div id="errorDiv">
+            <p id="erro" style="color: white;"></p>
+        </div>
+    </form>
+
+</body>
+
+<script src="../functions/login.js" type="module"></script>
+</html>

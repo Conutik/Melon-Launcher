@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<style>
+  #parent-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #bar-container {
+    width: 200px;
+    height: 25px;
+    background-color: transparent;
+  }
+
+  #bar {
+    width: 0;
+    height: 100%;
+    background-color: #29B76D;
+    transition: width 0.2s;
+    border-color: white;
+  }
+
+  #logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  div {
+    text-align: center;
+  }
+
+  :not(input):not(textarea),
+  :not(input):not(textarea)::after,
+  :not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+  }
+
+  input,
+  button,
+  textarea,
+  :focus {
+    outline: none;
+  }
+</style>
+
+
+<body style="background: rgb(21, 24, 24);">
+  <img src="../pictures/logo.png" id="logo" width="200px" height="200px">
+
+  <br><br><br><br>
+
+
+  <div id="parent-bar">
+    <div id="bar-container">
+      <div id="bar"></div>
+    </div>
+  </div>
+
+  <script>
+
+    let i = 0
+
+    let progressBar = document.getElementById('bar');
+    setTimeout(idk, 1000)
+    let interval = setInterval(idk, 50)
+
+    // localStorage.removeItem("profiles")
+
+    const ipc = require('electron').ipcRenderer;
+
+    function idk() {
+
+      if (i >= 100) {
+        clearInterval(interval)
+
+        if(localStorage.getItem("profiles")) {
+          ipc.send("open-main-menu")
+        } else {
+          ipc.send("open-login-menu")
+        }
+        
+
+        window.close()
+        return;
+      }
+      i++
+      progressBar.style.width = i + "%";
+    }
+  </script>
+
+
+</body>
+
+</html>
