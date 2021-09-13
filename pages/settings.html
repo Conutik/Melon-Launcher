@@ -5,6 +5,10 @@
   .slidecontainer {
     width: 100%;
     /* Width of the outside container */
+    display: flex;
+    align-content: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
   }
 
   .slidecontainer2 {
@@ -64,7 +68,9 @@
     width: 400px;
     height: 75px;
     border: none;
-    padding: 50px;
+    padding-bottom: 70px;
+    padding-left: 25px;
+    padding-right: 25px;
     margin: 20px;
     background-color: rgb(29, 33, 34);
     border-radius: 15px;
@@ -174,12 +180,13 @@
     /* Remove borders */
     color: white;
     /* White text */
-    padding: 12px 16px;
+    padding: 12px -40px;
     /* Some padding */
     font-size: 16px;
     /* Set a font size */
     cursor: pointer;
     /* Mouse pointer on hover */
+    font-family: sans-serif;
   }
 
   /* Darker background on mouse-over */
@@ -196,7 +203,6 @@
   #mcPath {
     border-radius: 10px;
     background: none;
-    padding: 0 20px;
     width: 400px;
     height: 40px;
     outline-width: 0px;
@@ -204,19 +210,41 @@
     font-weight: bold;
     color: white;
     font-size: 12.5px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    display: flex;
   }
 
   #jrePath {
-    border-radius: 10px;
     background: none;
-    padding: 0 20px;
     width: 400px;
     height: 40px;
     outline-width: 0px;
-    border: transparent;
+    border: none;
     font-weight: bold;
     color: white;
     font-size: 12.5px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    display: flex;
+    font-style: normal;
+  }
+
+  #hrRes {
+    margin-top: -15px;
+    margin-bottom: 5px;
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    background-color: gray
+  }
+
+  #pathMSG {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    font-style: normal;
+    font-family: sans-serif;
   }
 </style>
 
@@ -228,35 +256,30 @@
 
   <div class="flexbox">
     <div id="boxdiv">
+
+      <p id="pathMSG">Minecraft & Java Paths</p>
+
+
+      <hr id="hrRes">
+
+
       <div class="slidecontainer">
-        <div>
-          <div>
-            <input type="button" class="btn" id="jrePath" value="Select Files">
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="slidecontainer2">
-        <div class="slidecontainer2">
-          <div>
-            <input type="button" class="btn" id="mcPath" value="Select Files">
-          </div>
-          
-
-        </div>
+        <input type="button" class="btn" id="jrePath" value="Select Files">
+        <input type="button" class="btn" id="mcPath" value="Select Files">
       </div>
 
     </div>
 
     <div id="boxdiv">
+      <p>TEST</p>
       <div class="slidecontainer2">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
       </div>
     </div>
 
   </div>
+
+
 
   <br><br><br>
 

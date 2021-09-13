@@ -1,4 +1,6 @@
+const { ipcMain } = require('electron')
 const si = require('systeminformation')
+const ipc = require('electron').ipcRenderer;
 
 function test() {
     si.mem().then(x => {
@@ -8,14 +10,18 @@ function test() {
         x = x*1024/2
         console.log(x)
         console.log(x/2)
-        c = x/2
+        let c = x/2
+        console.log(c)
+
+        let z = (x+c)/2
+
+        console.log(z)
 
         document.getElementById('myRange').max = x;
         document.getElementById('myRange').min = c;
+        document.getElementById('myRange').value = z;
     })
 }
-
-test()
 
 /*
 
@@ -36,6 +42,10 @@ function jrePathChanger() {
     let jr = localStorage.getItem("jrePath")
     if(!jr) jr = process.env.JAVA_HOME
     document.getElementById("jrePath").value = "Java Path: " + jr
+
+    
+
+test()
 
 }
 
@@ -110,4 +120,11 @@ END OF MINECRAFT PATH
 
 
 */
+
+function icpsend(msg) {
+    ipc.send(msg)
+    window.close()
+}
+
+document.getElementById('submit').onclick = function() { icpsend("open-main-menu") }
 
