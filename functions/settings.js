@@ -1,26 +1,20 @@
-const { ipcMain } = require('electron')
-const si = require('systeminformation')
 const ipc = require('electron').ipcRenderer;
+const os = require('os')
+const auth = require('../functions/auth.ts')
+const path = require('path');
 
 function test() {
-    si.mem().then(x => {
-        x = x.total/1024/1024/1024
+        let x = os.totalmem/1024/1024/1024
 
         x = Math.ceil(x)
         x = x*1024/2
-        console.log(x)
-        console.log(x/2)
         let c = x/2
-        console.log(c)
 
         let z = (x+c)/2
-
-        console.log(z)
 
         document.getElementById('myRange').max = x;
         document.getElementById('myRange').min = c;
         document.getElementById('myRange').value = z;
-    })
 }
 
 /*
@@ -51,11 +45,7 @@ test()
 
 function jrePathChange() {
     if(!document.getElementById('jrePathChange').files[0]) return;
-    let file = document.getElementById('jrePathChange').files[0].path;
-
-    let testArray = file.split('\\')
-    testArray.pop()
-    file = testArray.join('\\')
+    let file = path.dirname(document.getElementById('jrePathChange').files[0].path);
 
     document.getElementById("jrePath").value = "Java Path: " + file
 
@@ -93,11 +83,9 @@ function mcPathChanger() {
 
 function mcPathChange() {
     if(!document.getElementById('mcPathChange').files) return;
-    let file = document.getElementById('mcPathChange').files[0].path;
+    let file = path.dirname(document.getElementById('mcPathChange').files[0].path);
 
-    let testArray = file.split('\\')
-    testArray.pop()
-    file = testArray.join('\\')
+
 
     document.getElementById("mcPath").value = "Minecraft Path: " + file
 

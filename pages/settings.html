@@ -246,6 +246,13 @@
     font-style: normal;
     font-family: sans-serif;
   }
+
+  br {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
 </style>
 
 
@@ -271,7 +278,11 @@
     </div>
 
     <div id="boxdiv">
-      <p>TEST</p>
+      <div style="display: inline-flex">
+        <p style="align-items: flex-end; justify-content: flex-end;">TEST</p>
+        <p style="align-items: flex-end; justify-items: flex-end;">TEST</p>
+        <p style="align-self: flex-end; justify-self: flex-end;">TEST</p>
+      </div>
       <div class="slidecontainer2">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
       </div>

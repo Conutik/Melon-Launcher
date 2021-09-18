@@ -1,4 +1,4 @@
-const { Authenticator } = require('minecraft-launcher-core');
+const auth = require('../functions/auth.ts')
 
 function logSubmit(event) {
 
@@ -9,9 +9,7 @@ function logSubmit(event) {
   let email = document.getElementById('email').value
   let password = document.getElementById('password').value
 
-  const con = require('electron').remote.getGlobal('console')
-
-  Authenticator.getAuth(email, password).then(x => {
+  auth.authenticate(email, password).then(x => {
 
     let xs = JSON.stringify(x)
 
@@ -21,8 +19,6 @@ function logSubmit(event) {
     if(!profiles) {
       localStorage.setItem("profiles", xs)
       localStorage.setItem("current", xs)
-
-      console.log(localStorage.getItem("current"))
     } else {
 
       localStorage.setItem("current", xs)
@@ -61,8 +57,6 @@ function logSubmit(event) {
     // do something with err
 
     document.getElementById('erro').innerHTML = "Incorrect email or password";
-
-    console.log(err)
 
   })
   
