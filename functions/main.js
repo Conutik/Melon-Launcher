@@ -32,10 +32,6 @@ function logSubmit() {
 
             let opts = {
                 clientPackage: null,
-                // For production launchers, I recommend not passing 
-                // the getAuth function through the authorization field and instead
-                // handling authentication outside before you initialize
-                // MCLC so you can handle auth based errors and validation!
                 authorization: current,
                 root: mcPath,
                 javaPath: jre,
@@ -66,8 +62,6 @@ function logSubmit() {
 
         }
     }).catch(e => {
-
-        // auth.refresh()
 
         
         localStorage.removeItem("current")

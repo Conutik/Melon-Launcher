@@ -10,6 +10,7 @@ module.exports = {
             axios.post('https://authserver.mojang.com/validate', {
                 accessToken: current.accessToken,
             }).then(function (response) {
+                console.log(response)
                 resolve(true);
             }).catch(e => {
                 reject(false);
