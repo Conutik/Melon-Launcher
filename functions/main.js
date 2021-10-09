@@ -1,115 +1,85 @@
-const { app } = require('electron');
 const auth = require('../functions/auth.ts')
-const ipc = require('electron').ipcRenderer;
+const { ipcRenderer, remote, shell } = require('electron')
+const { Client } = require('minecraft-launcher-core')
 
 // localStorage.removeItem("current")
+function logSubmit () {
+  if (document.getElementById('submit').innerHTML === 'LAUNCHING') return
 
-function logSubmit() {
+  const profiles = localStorage.getItem('profiles')
+  const current = JSON.parse(localStorage.getItem('current'))
 
-    if (document.getElementById('submit').innerHTML === "LAUNCHING") return;
+  let jre = localStorage.getItem('jrePath')
+  let mcPath = localStorage.getItem('mcPath')
 
-    let profiles = localStorage.getItem("profiles")
+  if (jre) jre = process.env.JAVA_HOME
 
-    let current = JSON.parse(localStorage.getItem("current"))
+  if (!mcPath) mcPath = process.env.APPDATA + '/.minecraft'
 
-    let jre = localStorage.getItem("jrePath")
-    let mcPath = localStorage.getItem("mcPath")
+  auth.validate().then(x => {
+    if (x === true) {
+      const launcher = new Client()
 
-    if (jre) jre = process.env.JAVA_HOME;
+      const opts = {
+        clientPackage: null,
+        authorization: current,
+        root: mcPath,
+        javaPath: jre,
+        version: {
+          number: '1.8.9',
+          type: 'release'
+        },
+        memory: {
+          max: '4000M',
+          min: '4000M'
+        },
+        // window: {
+        // fullscreen: true
+        // width: window.screen.availWidth,
+        // height: window.screen.availHeight
+        // },
+        forge: 'C:/Users/ziadk/Documents/coding/Melon Client/forge.jar'
+      }
+      launcher.launch(opts)
 
-    if (!mcPath) mcPath = process.env.APPDATA + "/.minecraft";
+      // launcher.on('debug', () => {});
+      launcher.on('data', () => {
+        document.getElementById('submit').innerHTML = 'LAUNCHING'
+      })
+    }
+  }).catch(() => {
+    localStorage.removeItem('current')
+    localStorage.removeItem('profiles')
 
-    auth.validate().then(x => {
-
-        if (x === true) {
-
-            const { Client } = require('minecraft-launcher-core');
-            const launcher = new Client();
-
-
-
-
-
-            let opts = {
-                clientPackage: null,
-                authorization: current,
-                root: mcPath,
-                javaPath: jre,
-                version: {
-                    number: "1.8.9",
-                    type: "release"
-                },
-                memory: {
-                    max: "4000M",
-                    min: "4000M"
-                },
-                // window: {
-                // fullscreen: true
-                // width: window.screen.availWidth,
-                // height: window.screen.availHeight
-                // },
-                forge: "C:/Users/ziadk/Documents/coding/Melon Client/forge.jar"
-            }
-
-            launcher.launch(opts);
-
-            let i = 0
-
-            // launcher.on('debug', (e) => {});
-            launcher.on('data', (e) => {
-                document.getElementById('submit').innerHTML = "LAUNCHING";
-            });
-
-        }
-    }).catch(e => {
-
-        
-        localStorage.removeItem("current")
-        localStorage.removeItem("profiles")
-
-
-
-        ipc.send("open-login-menu")
-
-        window.close()
-    })
-
-
-
-
-    // window.close()
-}
-
-function appQuit() {
+    ipcRenderer.send('open-login-menu')
     window.close()
+  })
+  // window.close()
 }
 
-function appMinimize() {
-    const { remote } = require('electron')
-    remote.BrowserWindow.getFocusedWindow().minimize();
+function appMinimize () {
+  remote.BrowserWindow.getFocusedWindow().minimize()
 }
 
-function openTab(url) {
-    require("electron").shell.openExternal(url);
+function openTab (url) {
+  shell.openExternal(url)
 }
 
-function icpsend(msg) {
-    ipc.send(msg)
-    window.close()
+function icpsend (msg) {
+  ipcRenderer.send(msg)
+  window.close()
 }
 
-document.getElementById('submit').onclick = function () { logSubmit() }
+document.getElementById('submit').onclick = () => logSubmit()
 
-document.getElementById('settingsButton').onclick = function () { icpsend("open-settings-menu") }
+document.getElementById('settingsButton').onclick = () => icpsend('open-settings-menu')
 
+document.getElementById('closeButton').onclick = () => window.close()
 
+document.getElementById('minimizeButton').onclick = () => appMinimize()
 
-document.getElementById('closeButton').onclick = function () { appQuit() }
+document.getElementById('youtubeButton').onclick = () => openTab('https://www.youtube.com/c/melonclient')
 
-document.getElementById('minimizeButton').onclick = function () { appMinimize() }
+document.getElementById('twitterButton').onclick = () => openTab('https://twitter.com/ClientMelon')
 
-document.getElementById('youtubeButton').onclick = function () { openTab('https://www.youtube.com/c/melonclient') }
-
-document.getElementById('twitterButton').onclick = function () { openTab('https://twitter.com/ClientMelon') }
-
-document.getElementById('discordButton').onclick = function () { openTab('https://discord.gg/melonclient') }
+document.getElementById('discordButton').onclick = () => openTab('https://discord.gg/melonclient')

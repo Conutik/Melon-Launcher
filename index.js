@@ -1,5 +1,4 @@
-const { create } = require('domain')
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -10,7 +9,6 @@ function createWindow () {
     autoHideMenuBar: true,
     frame: false,
     resizable: false,
-    skipTaskbar: true,
     webPreferences: {
       preload: path.join(__dirname, 'functions/preload.js'),
       nodeIntegration: true,
@@ -29,14 +27,14 @@ function createLoginPage () {
     frame: false,
     resizable: false,
     webPreferences: {
-        preload: path.join(__dirname, 'functions/preload.js'),
-        nodeIntegration: true,
-        contextIsolation: false,
-        enableRemoteModule: true,
-        worldSafeExecuteJavaScript: true
+      preload: path.join(__dirname, 'functions/preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      worldSafeExecuteJavaScript: true
     },
     backgroundColor: '#171614'
-})
+  })
 
   login.loadFile('pages/login.html')
 }
@@ -49,14 +47,14 @@ function createMainPage () {
     frame: false,
     resizable: false,
     webPreferences: {
-        preload: path.join(__dirname, 'functions/preload.js'),
-        nodeIntegration: true,
-        contextIsolation: false,
-        enableRemoteModule: true,
-        worldSafeExecuteJavaScript: true
+      preload: path.join(__dirname, 'functions/preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      worldSafeExecuteJavaScript: true
     },
     backgroundColor: '#171614'
-})
+  })
 
   main.loadFile('pages/main.html')
 }
@@ -69,19 +67,18 @@ function createSettingsPage () {
     frame: false,
     resizable: false,
     webPreferences: {
-        preload: path.join(__dirname, 'functions/preload.js'),
-        nodeIntegration: true,
-        contextIsolation: false,
-        enableRemoteModule: true,
-        worldSafeExecuteJavaScript: true,
-        devTools: true
+      preload: path.join(__dirname, 'functions/preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      worldSafeExecuteJavaScript: true,
+      devTools: true
     },
     backgroundColor: '#171614'
-})
+  })
 
   main.loadFile('pages/settings.html')
 }
-
 
 app.whenReady().then(() => {
   createWindow()
@@ -91,21 +88,19 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
       // createLoginPage()
-      
     }
   })
 })
 
-const {ipcMain} = require('electron')
-ipcMain.on("open-login-menu", (event, arg) => {
+ipcMain.on('open-login-menu', (event, arg) => {
   createLoginPage()
 })
 
-ipcMain.on("open-main-menu", (event, arg) => {
+ipcMain.on('open-main-menu', (event, arg) => {
   createMainPage()
 })
 
-ipcMain.on("open-settings-menu", (event, arg) => {
+ipcMain.on('open-settings-menu', (event, arg) => {
   createSettingsPage()
 })
 

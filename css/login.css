@@ -4,23 +4,25 @@
     background-color: lightgray;
   }
   
-  #bar {
-    width: 0;
-    height: 100%;
-    background-color: firebrick;
-    transition: width 0.2s;
-  }
+#bar {
+  width: 0;
+  height: 100%;
+  background-color: firebrick;
+  transition: width 0.2s;
+}
 
-  h1 {text-align: center;}
-    p {text-align: center;}
-    div {text-align: center;}
-    :not(input):not(textarea),
-    :not(input):not(textarea)::after,
-    :not(input):not(textarea)::before {
-        -webkit-user-select: none;
-        user-select: none;
-        cursor: default;
-    }
-    input, button, textarea, :focus {
+h1, p, div {
+  text-align: center;
+}
+
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+input, button, textarea, :focus {
         outline: none;
-    }
+}
