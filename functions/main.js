@@ -29,7 +29,6 @@ function logSubmit () {
   if (!mcPath) mcPath = process.env.APPDATA + '/.minecraft'
 
   if(current.mic) {
-    const { Client } = require('minecraft-launcher-core');
         const launcher = new Client();
 
         if(!current.Roles) current.Roles = []
