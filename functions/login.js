@@ -1,84 +1,53 @@
 const auth = require('../functions/auth.ts')
+const form = document.getElementById('form')
+const { ipcRenderer, remote } = require('electron')
 
-function logSubmit(event) {
+function logSubmit (event) {
+  event.preventDefault()
+  if (!window.navigator.onLine) {
+    document.getElementById('erro').innerHTML = 'You must have an internet connection'
+    return
+  }
 
-  event.preventDefault();
-
-  if(!window.navigator.onLine) return document.getElementById('erro').innerHTML = "You must have an internet connection"
-
-  let email = document.getElementById('email').value
-  let password = document.getElementById('password').value
+  const email = document.getElementById('email').value
+  const password = document.getElementById('password').value
 
   auth.authenticate(email, password).then(x => {
+    const xs = JSON.stringify(x)
 
-    let xs = JSON.stringify(x)
-
-    
-
-    let profiles = localStorage.getItem("profiles")
-    if(!profiles) {
-      localStorage.setItem("profiles", xs)
-      localStorage.setItem("current", xs)
+    let profiles = localStorage.getItem('profiles')
+    if (!profiles) {
+      localStorage.setItem('profiles', xs)
+      localStorage.setItem('current', xs)
     } else {
-
-      localStorage.setItem("current", xs)
-
-      profiles = profiles.split(`,,==`)
+      localStorage.setItem('current', xs)
+      profiles = profiles.split(',,==')
 
       let sa = []
 
-      if(Array.isArray(profiles)) {
-
+      if (Array.isArray(profiles)) {
         profiles.push(xs)
 
-        profiles = profiles.join(`,,==`)
-      localStorage.setItem("profiles", profiles)
-
+        profiles = profiles.join(',,==')
+        localStorage.setItem('profiles', profiles)
       } else {
-
         sa.push(profiles)
         sa.push(xs)
 
-        sa = sa.join(`,,==`)
-        localStorage.setItem("profiles", sa)
+        sa = sa.join(',,==')
+        localStorage.setItem('profiles', sa)
       }
-
-      
     }
 
-    const ipc = require('electron').ipcRenderer;
-    ipc.send('open-main-menu')
+    ipcRenderer.send('open-main-menu')
     window.close()
-    
-
-
-
-  }).catch(err => {
-    // do something with err
-
-    document.getElementById('erro').innerHTML = "Incorrect email or password";
-
+  }).catch(() => {
+    document.getElementById('erro').innerHTML = 'Incorrect email or password'
   })
-  
 }
 
-function appQuit() {
-  window.close()
-}
+document.getElementById('closeButton').onclick = () => window.close()
 
-function appMinimize() {
-  const { remote } = require('electron')
-  remote.BrowserWindow.getFocusedWindow().minimize();
-}
+document.getElementById('minimizeButton').onclick = () => remote.BrowserWindow.getFocusedWindow().minimize()
 
-
-document.getElementById('closeButton').onclick = function() { appQuit() }
-
-document.getElementById('minimizeButton').onclick = function() { appMinimize() }
-
-
-
-
-const form = document.getElementById('form');
-// const log = document.getElementById('log');
-form.addEventListener('submit', logSubmit);
+form.addEventListener('submit', logSubmit)
