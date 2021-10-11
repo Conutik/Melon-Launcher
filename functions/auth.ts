@@ -1,11 +1,13 @@
 const axios = require('axios');
+const msAuth = require('../msAuth.json')
+const ipc = require('electron').ipcRenderer;
 
 module.exports = {
     validate: async function () {
         return new Promise((resolve, reject) => {
 
             let current = JSON.parse(localStorage.getItem("current"))
-            if(!current) throw new Error("test");
+            if (!current) throw new Error("test");
 
             axios.post('https://authserver.mojang.com/validate', {
                 accessToken: current.accessToken,
@@ -34,7 +36,7 @@ module.exports = {
         })
     },
 
-    invalidate: async function() {
+    invalidate: async function () {
         return new Promise((resolve, reject) => {
             let current = JSON.parse(localStorage.getItem("current"))
 
@@ -42,7 +44,7 @@ module.exports = {
                 accessToken: current.accessToken,
                 clientToken: current.clientToken
             }).then(function (response) {
-                if(response.status === 204) {
+                if (response.status === 204) {
                     resolve(true);
                 }
             }).catch(e => {
@@ -50,7 +52,7 @@ module.exports = {
         })
     },
 
-    authenticate: async function(email, password) {
+    authenticate: async function (email, password) {
         return new Promise((resolve, reject) => {
 
             axios.post('https://authserver.mojang.com/authenticate', {
@@ -67,5 +69,9 @@ module.exports = {
                 reject(e.response);
             })
         })
+    },
+
+    msPopup: async function () {
+        ipc.send("microsoft-login")
     }
 }
