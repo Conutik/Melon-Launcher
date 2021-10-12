@@ -6,15 +6,15 @@ const auth = require('../functions/auth.ts')
 
 
 ipc.on('data', function(evt, message) {
-    console.log(message)
 
     message.mic = true;
     
     localStorage.setItem("current", JSON.stringify(message))
 
     
-    ipc.send('open-main-menu')
-    ipc.send('close-login-menu')
+    // ipc.send('close-login-menu')
+    ipc.send('open-main-menu-micro')
+    
     window.close()
     
 })

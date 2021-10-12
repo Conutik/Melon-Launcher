@@ -1,6 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
-const {ipcMain} = require('electron')
 
 let main;
 
@@ -152,8 +151,8 @@ ipcMain.on("microsoft-login", (event, arg) => {
   createMspopup()
 })
 
-ipcMain.on("close-login-menu", (event, arg) => {
-  BrowserWindow.getFocusedWindow().close
+ipcMain.on('open-main-menu-micro', (event, arg) => {
+  createMainPage()
 })
 
 app.on('window-all-closed', () => {

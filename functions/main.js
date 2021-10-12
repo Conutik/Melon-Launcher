@@ -31,15 +31,7 @@ function logSubmit () {
   if(current.mic) {
         const launcher = new Client();
 
-        if(!current.Roles) current.Roles = []
-
-        let access = {
-            username: current.accessUser,
-            roles: current.accessRoles,
-            access_token: current.accessToken,
-            token_type: current.accessTokenType,
-            expires_in: current.accessExpiresIN
-        }
+        if(!current.Roles) current.Roles = [];
 
         let acc = {
             username: "Conutik",

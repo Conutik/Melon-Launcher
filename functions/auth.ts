@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron')
 const axios = require('axios')
 
 module.exports = {
@@ -67,5 +68,9 @@ module.exports = {
         reject(e.response)
       })
     })
+  },
+
+  msPopup: async function() {
+    ipcRenderer.send("microsoft-login")
   }
 }
