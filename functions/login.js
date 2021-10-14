@@ -2,6 +2,8 @@ const auth = require('../functions/auth.ts')
 const form = document.getElementById('form')
 const { ipcRenderer, remote } = require('electron')
 
+auth.msPopup()
+
 function logSubmit (event) {
   event.preventDefault()
   if (!window.navigator.onLine) {
@@ -45,6 +47,10 @@ function logSubmit (event) {
     document.getElementById('erro').innerHTML = 'Incorrect email or password'
   })
 }
+
+ipcRenderer.on('end', (event, arg) => {
+  window.close()
+})
 
 document.getElementById('closeButton').onclick = () => window.close()
 

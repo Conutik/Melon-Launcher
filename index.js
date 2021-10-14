@@ -86,7 +86,7 @@ function createSettingsPage () {
   main.loadFile('pages/settings.html')
 }
 
-function createMspopup () {
+function createMspopup (ev) {
   const win = new BrowserWindow({
     width: 500,
     height: 600,
@@ -113,6 +113,7 @@ function createMspopup () {
 
     win.webContents.on('did-finish-load', function () {
     win.webContents.send('data', params)
+    ev.reply('end')
     })
 
 
@@ -147,8 +148,8 @@ ipcMain.on('open-settings-menu', (event, arg) => {
   createSettingsPage()
 })
 
-ipcMain.on("microsoft-login", (event, arg) => {
-  createMspopup()
+ipcMain.on("microsoft-login", async (event, arg) => {
+  createMspopup(event)
 })
 
 ipcMain.on('open-main-menu-micro', (event, arg) => {

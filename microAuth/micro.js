@@ -10,9 +10,6 @@ ipc.on('data', function(evt, message) {
     message.mic = true;
     
     localStorage.setItem("current", JSON.stringify(message))
-
-    
-    // ipc.send('close-login-menu')
     ipc.send('open-main-menu-micro')
     
     window.close()

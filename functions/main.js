@@ -35,7 +35,7 @@ function logSubmit () {
 
         let acc = {
             username: "Conutik",
-            uuid: "7b7ef169-ad97-4011-822f-ef64fc54f87f",
+            uuid: "7b7ef169ad974011822fef64fc54f87f",
             access_token: current.accessToken
         }
 
