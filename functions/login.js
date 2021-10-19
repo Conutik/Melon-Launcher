@@ -2,7 +2,7 @@ const auth = require('../functions/auth.ts')
 const form = document.getElementById('form')
 const { ipcRenderer, remote } = require('electron')
 
-auth.msPopup()
+// auth.msPopup()
 
 function logSubmit (event) {
   event.preventDefault()
@@ -55,5 +55,6 @@ ipcRenderer.on('end', (event, arg) => {
 document.getElementById('closeButton').onclick = () => window.close()
 
 document.getElementById('minimizeButton').onclick = () => remote.BrowserWindow.getFocusedWindow().minimize()
+document.getElementById("micro").onclick = () => auth.msPopup()
 
 form.addEventListener('submit', logSubmit)

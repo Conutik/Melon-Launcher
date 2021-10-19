@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
-let main;
+var main;
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -88,8 +88,8 @@ function createSettingsPage () {
 
 function createMspopup (ev) {
   const win = new BrowserWindow({
-    width: 500,
-    height: 600,
+    width: 300,
+    height: 400,
     icon: 'pictures/logo.png',
     autoHideMenuBar: true,
     frame: false,

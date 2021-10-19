@@ -1,36 +1,19 @@
 const ipc = require('electron').ipcRenderer
-const os = require('os')
 const path = require('path')
 
-function test () {
-  let x = os.totalmem / 1024 / 1024 / 1024
+// IPC FUNCTION
 
-  x = Math.ceil(x)
-  x = x * 1024 / 2
-  const c = x / 2
-
-  const z = (x + c) / 2
-
-  document.getElementById('myRange').max = x
-  document.getElementById('myRange').min = c
-  document.getElementById('myRange').value = z
+function icpsend (msg) {
+  ipc.send(msg)
+  window.close()
 }
+
+// END OF IPC FUNCTION
 
 /*
-JRE FINDER THING
+JRE & MINECRAFT PATH CHANGER
 FOR MORE INFO DM Conutik#5777
 */
-
-const input = document.getElementById('jrePathChange')
-input.style.opacity = 0
-
-function jrePathChanger () {
-  let jr = localStorage.getItem('jrePath')
-  if (!jr) jr = process.env.JAVA_HOME
-  document.getElementById('jrePath').value = 'Java Path: ' + jr
-
-  test()
-}
 
 function jrePathChange () {
   if (!document.getElementById('jrePathChange').files[0]) return
@@ -40,43 +23,41 @@ function jrePathChange () {
 
   localStorage.setItem('jrePath', file)
 }
-window.addEventListener('load', jrePathChanger())
-
-document.getElementById('jrePath').onclick = function () { input.click() }
-
-input.addEventListener('change', jrePathChange)
-
-/* MINECRAFT FILE FINDER THING
-FOR MORE INFO DM Conutik#5777 */
-
-function mcPathChanger () {
-  let jrs = localStorage.getItem('mcPath')
-  if (!jrs) jrs = process.env.APPDATA + '/.minecraft'
-  document.getElementById('mcPath').value = 'Minecraft Path: ' + jrs
-}
 
 function mcPathChange () {
-  if (!document.getElementById('mcPathChange').files) return
+  // if (!document.getElementById('mcPathChange').files) return
+  console.log(document.getElementById('mcPathChange').files)
   const file = path.dirname(document.getElementById('mcPathChange').files[0].path)
 
   document.getElementById('mcPath').value = 'Minecraft Path: ' + file
 
-  localStorage.setItem('mcPath', file)
+  // localStorage.setItem('mcPath', file)
 }
-window.addEventListener('load', mcPathChanger())
+/* END OF JRE & MINECRAFT PATH CHANGER */
 
-const inputs = document.getElementById('mcPathChange')
-
-document.getElementById('mcPath').onclick = () => inputs.click()
-
-inputs.style.opacity = 0
-inputs.addEventListener('change', mcPathChange)
-
-/* END OF MINECRAFT PATH */
-
-function icpsend (msg) {
-  ipc.send(msg)
-  window.close()
+// CLOSE WINDOW AFTER LAUNCH PREF
+function closePref(box) {
+  localStorage.setItem("windowClosePref", box.checked)
 }
+// END OF CLOSE WINDOW PREF
 
-document.getElementById('submit').onclick = () => icpsend('open-main-menu')
+// SET MEMORY 
+function setMemory() {
+  localStorage.setItem("memory", document.getElementById('setMem').innerHTML)
+}
+// END OF SET MEMORY
+
+//EVENTS
+
+document.getElementById('myRange').oninput = () => document.getElementById('setMem').innerHTML = document.getElementById('myRange').value
+
+document.getElementById('jrePath').onclick = () => document.getElementById('jrePathChange').click();
+document.getElementById('mcPath').onclick = () => document.getElementById('mcPathChange').click();
+
+document.getElementById('submit').onclick = () => {
+  closePref(document.getElementById('closePref1'))
+  setMemory()
+  // mcPathChange()
+  // jrePathChange()
+  icpsend('open-main-menu')
+}

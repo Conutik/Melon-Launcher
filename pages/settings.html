@@ -253,6 +253,14 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+#closePref {
+  color: white;
+}
+
+.memoryLook {
+  color:white
+}
 </style>
 
 
@@ -260,6 +268,8 @@
 
 
   <br><br><br><br><br><br><br><br>
+
+  <div id="like_button_container"></div>
 
   <div class="flexbox">
     <div id="boxdiv">
@@ -271,20 +281,25 @@
 
 
       <div class="slidecontainer">
-        <input type="button" class="btn" id="jrePath" value="Select Files">
-        <input type="button" class="btn" id="mcPath" value="Select Files">
+        <input type="button" class="btn" id="jrePath">
+        <input type="button" class="btn" id="mcPath">
       </div>
 
     </div>
 
     <div id="boxdiv">
-      <div style="display: inline-flex">
-        <p style="align-items: flex-end; justify-content: flex-end;">TEST</p>
-        <p style="align-items: flex-end; justify-items: flex-end;">TEST</p>
-        <p style="align-self: flex-end; justify-self: flex-end;">TEST</p>
+      <div style="display: flex; justify-content: space-between;">
+        <p id="smallMem" class="memoryLook"></p>
+        <p id="setMem" class="memoryLook"></p>
+        <p id="maxMem" class="memoryLook"></p>
       </div>
       <div class="slidecontainer2">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      </div>
+      <br>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="closePref1">
+        <label class="form-check-label" for="closePref" id="closePref">Close launcher after launching</label>
       </div>
     </div>
 
@@ -336,10 +351,15 @@
 
   </div>
 
-  <input type="file" id="jrePathChange" name="test" style="pointer-events: none;" webkitdirectory />
-  <input type="file" id="mcPathChange" name="test" style="pointer-events: none;" webkitdirectory />
+  <input id="jrePathChange" style="display: none;" directory="" webkitdirectory="" type="file" />
+  <input id="mcPathChange" style="display: none;" directory="" webkitdirectory="" type="file"/>
 </body>
-
+<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 <script src="../functions/settings.js" type="module"></script>
+<script src="../functions/settingspreload.js" type="module"></script>
+
+
 
 </html>

@@ -17,6 +17,12 @@
         align-items: center;
     }
 
+    #microDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     #passwordDiv {
         display: flex;
         justify-content: center;
@@ -44,6 +50,22 @@
     outline-width: 0px;
     border: transparent;
 }
+
+#micro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 18px;
+        background: transparent;
+        padding: 0 20px;
+        width: 165px;
+        height: 50px;
+        outline-width: 0px;
+        border-color: #29B76D;
+        font-weight: bold;
+        color: white;
+        font-size: 15px;
+    }
 
 #password {
     border-radius: 18px;
@@ -110,6 +132,13 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+.x-icon {
+    position: absolute;
+    margin-left: -40px;
+}
+
+
 </style>
 
 
@@ -137,7 +166,15 @@
 
     <br><br><br><br><br><br><br><br><br><br>
 
+    <div id="microDiv">
+        <button id="micro">
+          <object type="image/svg+xml" data="https://s3-eu-west-1.amazonaws.com/cdn-testing.web.bas.ac.uk/scratch/bas-style-kit/ms-pictogram/ms-pictogram.svg" class="x-icon"></object> 
+           Sign in</button>
+      </div>
+
     <form id="form">
+        
+        <br>
         <div id="emailDiv">
             <input type="email" name="email" id="email" placeholder="Email" required>
         </div>
