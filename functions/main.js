@@ -1,5 +1,5 @@
 const auth = require('../functions/auth.ts')
-const { ipcRenderer, remote, shell } = require('electron')
+const { ipcRenderer, shell } = require('electron')
 const { Client } = require('minecraft-launcher-core')
 const os = require('os')
 
@@ -48,8 +48,8 @@ function logSubmit() {
     if (!current.Roles) current.Roles = [];
 
     let acc = {
-      username: "Conutik",
-      uuid: "7b7ef169ad974011822fef64fc54f87f",
+      username: current.userName,
+      uuid: current.userUUID,
       access_token: current.accessToken
     }
 
@@ -155,7 +155,7 @@ function logSubmit() {
 }
 
 function appMinimize() {
-  remote.BrowserWindow.getFocusedWindow().minimize()
+  // icpsend('minimize')
 }
 
 function openTab(url) {
@@ -180,3 +180,31 @@ document.getElementById('youtubeButton').onclick = () => openTab('https://www.yo
 document.getElementById('twitterButton').onclick = () => openTab('https://twitter.com/ClientMelon')
 
 document.getElementById('discordButton').onclick = () => openTab('https://discord.gg/melonclient')
+
+window.onload = () => {
+  let pfp = JSON.parse(localStorage.getItem("current"))
+  document.getElementById('idks').data = "https://crafatar.com/avatars/" + pfp.userUUID + "?size=15"
+}
+
+document.getElementById('micro').onclick = () => {
+
+  let rotatingArrow = document.getElementById('rotatingArrow')
+  
+  if(rotatingArrow.style.transform === "rotate(180deg)") {
+    rotatingArrow.style.transform = "rotate(360deg)"
+    document.getElementById('micro').style.height = "35px"
+    document.getElementById('micro').style.width = "80px"
+  } else {
+    rotatingArrow.style.transform = "rotate(180deg)"
+
+    let prof = JSON.parse(localStorage.getItem("current"))
+    prof = prof.userName;
+
+    document.getElementById('micro').style.height = "100px"
+    document.getElementById('micro').style.width = "120px"
+
+    document.getElementById('currAccName').innerHTML = prof
+
+    console.log(document.getElementById('micro').style.width)
+  }
+}

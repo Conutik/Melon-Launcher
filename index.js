@@ -63,6 +63,12 @@ function createMainPage () {
   })
 
   main.loadFile('pages/main.html')
+
+  main.minimize()
+
+  main.webContents.on('minimize', function () {
+    main.minimize()
+    })
 }
 
 function createSettingsPage () {

@@ -87,6 +87,7 @@
     let interval = setInterval(idk, 50)
 
     // localStorage.removeItem("profiles")
+    // localStorage.removeItem("current")
 
     const ipc = require('electron').ipcRenderer;
 
@@ -95,7 +96,17 @@
       if (i >= 100) {
         clearInterval(interval)
 
-        if(localStorage.getItem("profiles")) {
+        let current = JSON.parse(localStorage.getItem("current"))
+        if(localStorage.getItem("current")) {
+          if(current.mic) {
+            let now = new Date().getTime()
+            if(now >= current.accessExpiresIN) {
+              localStorage.removeItem("current")
+              localStorage.removeItem("profiles")
+              ipc.send("open-login-menu")
+              return;
+            }
+          }
           ipc.send("open-main-menu")
         } else {
           ipc.send("open-login-menu")

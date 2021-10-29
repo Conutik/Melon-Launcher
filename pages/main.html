@@ -16,12 +16,6 @@
         align-items: center;
     }
 
-    #closeDiv {
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-    }
-
     #socialDiv {
         display: flex;
         justify-content: flex-end;
@@ -172,9 +166,72 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+#micro {
+    width: 80px;
+    height: 35px;
+    border-radius: 18px;
+    background: transparent;
+    padding: 0 20px;
+    outline-width: 0px;
+    border-color: #29B76D;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    transition: height 500ms ease-in-out, width 500ms ease-in-out;
+}
+
+#closeDiv {
+        display: flex;
+        position: relative;
+        justify-content: end;
+    }
 </style>
 
+<header>
+    <div id="closeDiv">
+
+        
+        <button id="micro" style="position: absolute; left: 3%; top: 25%">
+            <object type="image/svg+xml" data="" class="x-icon" id="idks" style="width: 15px; height: 15px; transition: transform 500ms ease-in-out;"></object> 
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#29B76D" class="bi bi-caret-down" viewBox="0 0 16 16" id="rotatingArrow" style="transition: transform 500ms ease-in-out;">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+              </svg>
+             </button>
+    
+        <button class="btn" id="minimizeButton" style="padding: 12px 1px; padding-right: 15px; padding-left: 15px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrows-angle-contract" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z" />
+            </svg>
+        </button>
+        <button class="btn" id="closeButton" style="padding: 12px 1px; padding-right: 15px; padding-left: 15px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                viewBox="0 0 16 16">
+                <path
+                    d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
+            </svg>
+        </button>
+    
+    
+    </div>
+    
+    </div>
+</header>
+    
+
+<!--
 <div id="closeDiv">
+
+
+    <button id="micro" style="position: absolute; left: 3%;">
+        <object type="image/svg+xml" data="" class="x-icon" id="idks" style="width: 15px; height: 15px; transition: transform 500ms ease-in-out;"></object> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#29B76D" class="bi bi-caret-down" viewBox="0 0 16 16" id="rotatingArrow" style="transition: transform 500ms ease-in-out;">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+          </svg>
+         </button>
 
     <button class="btn" id="minimizeButton" style="padding: 12px 1px; padding-right: 15px; padding-left: 15px;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -193,6 +250,9 @@
 
 
 </div>
+
+</div>
+-->
 
 
 
