@@ -19,9 +19,9 @@ window.onload = () => {
     document.getElementById('mcPath').value = 'Minecraft Path: ' + jrs
   }
 
-  function closePref() {
-    let data = localStorage.getItem("windowClosePref")
-    if(!data) {
+  function closePref () {
+    const data = localStorage.getItem('windowClosePref')
+    if (!data) {
       localStorage.setItem('windowClosePref', true)
       document.getElementById('closePref1').checked = true
     } else {
@@ -29,18 +29,18 @@ window.onload = () => {
     }
   }
 
-  function memorySlider() {
+  function memorySlider () {
     let x = os.totalmem / 1024 / 1024 / 1024
-  
+
     x = Math.ceil(x)
     x = x * 1024 / 2
     const c = x / 2
-  
+
     const z = (x + c) / 2
 
     let mem = localStorage.getItem('memory')
-    if(!mem) mem = z
-  
+    if (!mem) mem = z
+
     document.getElementById('myRange').max = x
     document.getElementById('maxMem').innerHTML = x
     document.getElementById('myRange').min = c

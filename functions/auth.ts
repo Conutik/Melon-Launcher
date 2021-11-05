@@ -70,7 +70,7 @@ module.exports = {
     })
   },
 
-  msPopup: async function() {
-    ipcRenderer.send("microsoft-login")
+  msPopup: async function () {
+    ipcRenderer.send('microsoft-login')
   }
 }

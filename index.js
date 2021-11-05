@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
-var main;
+let main
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -39,10 +39,6 @@ function createLoginPage () {
   })
 
   login.loadFile('pages/login.html')
-
-  
-
-  
 }
 
 function createMainPage () {
@@ -68,7 +64,7 @@ function createMainPage () {
 
   main.webContents.on('minimize', function () {
     main.minimize()
-    })
+  })
 }
 
 function createSettingsPage () {
@@ -111,28 +107,23 @@ function createMspopup (ev) {
   win.loadURL('https://login.live.com/oauth20_authorize.srf?client_id=3f4d7aa8-1ef6-4842-aa65-cad1278ad729&response_type=code&redirect_uri=https://melon.conutikmc.repl.co/redirect&scope=XboxLive.signin%20offline_access')
 
   win.webContents.on('will-redirect', function (event, newUrl) {
-    if(!newUrl.includes("/done?")) return;
+    if (!newUrl.includes('/done?')) return
     win.loadFile('microAuth/micro.html')
-    let url = new URL(newUrl)
-    let search = url.search.substring(1);
-    let params = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+    const url = new URL(newUrl)
+    const search = url.search.substring(1)
+    const params = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
 
     win.webContents.on('did-finish-load', function () {
-    win.webContents.send('data', params)
-    ev.reply('end')
+      win.webContents.send('data', params)
+      ev.reply('end')
     })
-
-
     // More complex code to handle tokens goes here
-});
+  })
 }
-
-
 
 app.whenReady().then(() => {
   createWindow()
   // createLoginPage()
-
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -154,7 +145,7 @@ ipcMain.on('open-settings-menu', (event, arg) => {
   createSettingsPage()
 })
 
-ipcMain.on("microsoft-login", async (event, arg) => {
+ipcMain.on('microsoft-login', async (event, arg) => {
   createMspopup(event)
 })
 

@@ -3,6 +3,7 @@
   "productName": "Melon Client",
   "version": "0.1.0",
   "main": "index.js",
+  "description": " Melon Client launcher ",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -12,16 +13,19 @@
     "s": "node test.js"
   },
   "keywords": [],
-  "author": " ",
+  "author": " BitSurge Development ",
   "license": "ISC",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "pictures/Melondark.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "my_app"
+            "name": "Melon_Client",
+            "setupIcon": "pictures/logo.ico"
           }
         },
         {
